@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DownhillDudes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/home_page.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: rgba(13, 98, 30, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        header a {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(13, 98, 30, 0.8);
+        }
+
+        header a:hover{
+            background-color: #808080;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .trail-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .trail-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            transition: background-color 0.5s ease;
+        }
+
+        .trail-list li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .trail-list li a:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            background-color: rgba(13, 98, 30, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo.png' %}" alt="logo">
+        <h1>DownhillDudes</h1>
+        <a href="{% url 'admin_page' %}"><b>Log In</b></a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'magic_page' %}">Magic Page</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <ul class="trail-list">
+            {% for trail in trails %}
+            <li><a href="{% url 'trail_detail' trail.id %}">{{ trail.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; 2024 DownhillDudes (Group 113)</p>
+    </footer>
+</body>
+</html>
+
+

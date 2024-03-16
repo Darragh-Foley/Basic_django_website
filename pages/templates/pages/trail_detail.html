@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ trail.name }}</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            background-image: url('{{ Trail.picture.url }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: rgba(13, 98, 30, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #fff
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            border: 2px solid #007bff;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(13, 98, 30, 0.8);
+            color: #fff; /* White text color */
+            padding: 10px 0;
+            text-align: center;
+            z-index: 2; /* Ensure footer appears above the background */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo.png' %}" alt="logo">
+        <h1>DownhillDudes</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'magic_page' %}">Magic Page</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1><b>{{ trail.name }}</b></h1>
+        <p><strong>Location:</strong> {{ trail.location }}</p>
+        <p><strong>Average Rating:</strong> {{average_rating}}</p>
+        <p><strong>Description:</strong> {{ trail.description }}</p>
+        <h2>Our Reviews:</h2>
+        <ul>
+            {% for review in trail.review_set.all %}
+                <li>{{ review.rating }} - {{ review.comment }}</li>
+            {% empty %}
+                <li>No reviews yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'home' %}" class="back-link">Back to Home</a>
+    </div>
+    <footer>
+        <p>&copy; 2024 DownhillDudes (Group 113)</p>
+    </footer>
+</body>
+</html>
+
